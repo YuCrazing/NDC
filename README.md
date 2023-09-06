@@ -178,3 +178,10 @@ python gather_quantitative.py
 
 If you want to test on your own dataset, please refer to [data_preprocessing](https://github.com/czq142857/NDC/tree/master/data_preprocessing) for how to convert obj files into compatible formats.
 
+
+## Generating Quad Mesh
+Use `--quad_mesh` command to generate quad meshes. Currently, only `ndc` method supports generating quad meshes.
+
+```
+python main.py --test_input examples/bunny.sdf --input_type sdf --method ndc --quad_mesh
+```
