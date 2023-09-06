@@ -34,6 +34,8 @@ parser.add_argument("--method", action="store", dest="method", default="ndc", he
 parser.add_argument("--postprocessing", action="store_true", dest="postprocessing", default=False, help="Enable the post-processing step to close small holes [False]")
 parser.add_argument("--gpu", action="store", dest="gpu", default="0", help="to use which GPU [0]")
 
+parser.add_argument("--quad_mesh", action="store_true", dest="quad_mesh", default=False, help="Generating quad mesh [False]")
+
 FLAGS = parser.parse_args()
 
 is_training = False #training on a dataset
@@ -661,4 +663,7 @@ elif quick_testing:
     else:
         #vertices, triangles = utils.dual_contouring_ndc_test(pred_output_bool_numpy, pred_output_float_numpy)
         vertices, triangles = cutils.dual_contouring_ndc(np.ascontiguousarray(pred_output_bool_numpy, np.int32), np.ascontiguousarray(pred_output_float_numpy, np.float32))
-    utils.write_obj_triangle(FLAGS.sample_dir+"/quicktest_"+FLAGS.method+"_"+FLAGS.input_type+".obj", vertices, triangles)
+    if FLAGS.quad_mesh:
+        utils.write_obj_quad(FLAGS.sample_dir+"/quicktest_"+FLAGS.method+"_"+FLAGS.input_type+".obj", vertices, triangles)
+    else:
+        utils.write_obj_triangle(FLAGS.sample_dir+"/quicktest_"+FLAGS.method+"_"+FLAGS.input_type+".obj", vertices, triangles)

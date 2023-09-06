@@ -594,6 +594,18 @@ def write_obj_triangle(name, vertices, triangles):
         fout.write("f "+str(int(triangles[ii,0]+1))+" "+str(int(triangles[ii,1]+1))+" "+str(int(triangles[ii,2]+1))+"\n")
     fout.close()
 
+
+def write_obj_quad(name, vertices, triangles):
+    fout = open(name, 'w')
+    for ii in range(len(vertices)):
+        fout.write("v "+str(vertices[ii,0])+" "+str(vertices[ii,1])+" "+str(vertices[ii,2])+"\n")
+    assert len(triangles)%2==0
+    quad_num = len(triangles)//2
+    for ii in range(quad_num):
+        fout.write("f "+str(int(triangles[ii*2,0]+1))+" "+str(int(triangles[ii*2,1]+1))+" "+str(int(triangles[ii*2,2]+1))+" "+str(int(triangles[ii*2+1,2]+1))+"\n")
+    fout.close()
+
+
 def write_ply_triangle(name, vertices, triangles):
     fout = open(name, 'w')
     fout.write("ply\n")

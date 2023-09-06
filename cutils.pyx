@@ -96,21 +96,21 @@ def dual_contouring_ndc(int[:,:,:,::1] int_grid, float[:,:,:,::1] float_grid):
                     #add to all_triangles
                     if v0==0:
                         all_triangles[all_triangles_len,0] = vertices_grid[i,j-1,k-1]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i,j,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k-1]
-                        all_triangles_len += 1
-                        all_triangles[all_triangles_len,0] = vertices_grid[i,j-1,k-1]
                         all_triangles[all_triangles_len,1] = vertices_grid[i,j-1,k]
                         all_triangles[all_triangles_len,2] = vertices_grid[i,j,k]
                         all_triangles_len += 1
-                    else:
-                        all_triangles[all_triangles_len,0] = vertices_grid[i,j-1,k-1]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i,j,k-1]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k]
-                        all_triangles_len += 1
                         all_triangles[all_triangles_len,0] = vertices_grid[i,j-1,k-1]
                         all_triangles[all_triangles_len,1] = vertices_grid[i,j,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j-1,k]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k-1]
+                        all_triangles_len += 1
+                    else:
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i,j-1,k]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i,j-1,k-1]
+                        all_triangles_len += 1
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i,j-1,k-1]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k-1]
                         all_triangles_len += 1
 
     #j-direction
@@ -143,13 +143,13 @@ def dual_contouring_ndc(int[:,:,:,::1] int_grid, float[:,:,:,::1] float_grid):
                         all_triangles[all_triangles_len,2] = vertices_grid[i-1,j,k]
                         all_triangles_len += 1
                     else:
-                        all_triangles[all_triangles_len,0] = vertices_grid[i-1,j,k-1]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i,j,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k-1]
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i,j,k-1]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i-1,j,k-1]
                         all_triangles_len += 1
-                        all_triangles[all_triangles_len,0] = vertices_grid[i-1,j,k-1]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i-1,j,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i-1,j,k-1]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i-1,j,k]
                         all_triangles_len += 1
 
     #k-direction
@@ -182,13 +182,13 @@ def dual_contouring_ndc(int[:,:,:,::1] int_grid, float[:,:,:,::1] float_grid):
                         all_triangles[all_triangles_len,2] = vertices_grid[i,j-1,k]
                         all_triangles_len += 1
                     else:
-                        all_triangles[all_triangles_len,0] = vertices_grid[i-1,j-1,k]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i,j,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i-1,j,k]
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i-1,j,k]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i-1,j-1,k]
                         all_triangles_len += 1
-                        all_triangles[all_triangles_len,0] = vertices_grid[i-1,j-1,k]
-                        all_triangles[all_triangles_len,1] = vertices_grid[i,j-1,k]
-                        all_triangles[all_triangles_len,2] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,0] = vertices_grid[i,j,k]
+                        all_triangles[all_triangles_len,1] = vertices_grid[i-1,j-1,k]
+                        all_triangles[all_triangles_len,2] = vertices_grid[i,j-1,k]
                         all_triangles_len += 1
 
     return all_vertices_[:all_vertices_len], all_triangles_[:all_triangles_len]
